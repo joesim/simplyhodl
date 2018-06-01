@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import '@progress/kendo-theme-material/dist/all.css';
+import 'hammerjs';
 
 class App extends Component {
   render() {

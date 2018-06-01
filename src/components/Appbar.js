@@ -1,28 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
+import Hidden from "@material-ui/core/Hidden";
+import Divider from "@material-ui/core/Divider";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import vanderlandeLogo from "../assets/vanderlandelogo.jpg";
+import SideBarList from "./SideBarList";
+import SecondTopBar from "./SecondTopBar";
+import OverviewPage from "./OverviewPage";
+import Button from "@material-ui/core/Button";
+import { Grid } from "@material-ui/core";
+import InfoIcon from "@material-ui/icons/Info";
+import VanderlandeBrand from "../assets/vanderlande-brand.png";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
-  },
-  appFrame: {
+    flexGrow: 1,
     zIndex: 1,
     overflow: "hidden",
     position: "relative",
@@ -31,154 +31,137 @@ const styles = theme => ({
   },
   appBar: {
     position: "absolute",
-    backgroundColor: "#ffffff",
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+    background: "#e6750e",
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up("md")]: {
+      width: `calc(100% - ${drawerWidth}px)`
+    }
   },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
+  navIconHide: {
+    [theme.breakpoints.up("md")]: {
+      display: "none"
+    }
   },
-  "appBarShift-left": {
-    marginLeft: drawerWidth
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 20
-  },
-  hide: {
-    display: "none"
-  },
+  toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    position: "relative",
-    width: drawerWidth
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar
+    width: drawerWidth,
+    [theme.breakpoints.up("md")]: {
+      position: "relative"
+    }
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+    padding: theme.spacing.unit * 3
   },
-  "content-left": {
-    marginLeft: -drawerWidth
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  "contentShift-left": {
-    marginLeft: 0
-  },
-  brandName : {
-      width: 200
+  brand: {
+    width:250
   }
 });
 
-class PersistentDrawer extends React.Component {
+class ResponsiveDrawer extends React.Component {
   state = {
-    open: true,
-    anchor: "left"
+    mobileOpen: false
   };
 
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
+  handleDrawerToggle = () => {
+    this.setState({ mobileOpen: !this.state.mobileOpen });
   };
 
   render() {
     const { classes, theme } = this.props;
-    const { anchor, open } = this.state;
 
     const drawer = (
-      <Drawer
-        variant="persistent"
-        anchor={anchor}
-        open={open}
-        classes={{
-          paper: classes.drawerPaper
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={this.handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </div>
+      <div>
+        <div className={classes.toolbar} />
         <Divider />
-        <List />
-        <Divider />
-        <List />
-      </Drawer>
+        <SideBarList />
+      </div>
     );
 
     return (
       <div className={classes.root}>
-        <div className={classes.appFrame}>
-          <AppBar
-            className={classNames(classes.appBar, {
-              [classes.appBarShift]: open,
-              [classes[`appBarShift-${anchor}`]]: open
-            })}
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.handleDrawerToggle}
+              className={classes.navIconHide}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Grid
+              container
+              alignItems="center"
+              direction="row"
+              justify="space-between"
+            >
+              <img className={classes.brand} src={VanderlandeBrand} />
+              <Grid item>
+                <Grid
+                  container
+                  alignItems="center"
+                  direction="row"
+                  justify="space-between"
+                  spacing={8}
+                >
+                  <Grid item>
+                    <Button color="inherit">Login</Button>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      color="inherit"
+                      component="span"
+                    >
+                      <InfoIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+        <Hidden mdUp>
+          <Drawer
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={this.state.mobileOpen}
+            onClose={this.handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
           >
-            <Toolbar disableGutters={!open}>
-              <IconButton
-                aria-label="open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, open && classes.hide)}
-              >
-                <MenuIcon />
-              </IconButton>
-              <img src={vanderlandeLogo} className={classes.brandName} />
-            </Toolbar>
-          </AppBar>
-          {drawer}
-          <main
-            className={classNames(
-              classes.content,
-              classes[`content-${anchor}`],
-              {
-                [classes.contentShift]: open,
-                [classes[`contentShift-${anchor}`]]: open
-              }
-            )}
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <Drawer
+            variant="permanent"
+            open
+            classes={{
+              paper: classes.drawerPaper
+            }}
           >
-            <div className={classes.drawerHeader} />
-            <Typography>
-              {"Patate"}
-            </Typography>
-          </main>
-        </div>
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <SecondTopBar />
+          <OverviewPage />
+        </main>
       </div>
     );
   }
 }
 
-PersistentDrawer.propTypes = {
+ResponsiveDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawer);
+export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
