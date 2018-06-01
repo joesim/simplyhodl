@@ -1,47 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
-import BuildIcon from '@material-ui/icons/Build';
-import LocationSearchingIcon from '@material-ui/icons/LocationSearching';
-import DescriptionIcon from '@material-ui/icons/Description';
-import RemoveIcon from '@material-ui/icons/Remove';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from "@material-ui/core/Collapse";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import DraftsIcon from "@material-ui/icons/Drafts";
+import SendIcon from "@material-ui/icons/Send";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
+import BuildIcon from "@material-ui/icons/Build";
+import LocationSearchingIcon from "@material-ui/icons/LocationSearching";
+import DescriptionIcon from "@material-ui/icons/Description";
+import RemoveIcon from "@material-ui/icons/Remove";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import StarBorder from "@material-ui/icons/StarBorder";
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   nested: {
-    paddingLeft: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing.unit * 4
   },
   iconsSelection: {
-      color: "#e6750e"
+    color: "#e6750e"
   }
 });
 
 class NestedList extends React.Component {
-  state = { 
-      openScreening: false,
-      openDetection: false,
-      openEquipment: false,
-      openReports: false,
-
-    };
+  state = {
+    openScreening: false,
+    openDetection: false,
+    openEquipment: false,
+    openReports: false
+  };
 
   handleClickScreening = () => {
     this.setState({ openScreening: !this.state.openScreening });
@@ -158,7 +157,7 @@ class NestedList extends React.Component {
 }
 
 NestedList.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(NestedList);

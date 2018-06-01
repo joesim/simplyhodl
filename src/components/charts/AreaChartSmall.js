@@ -8,12 +8,15 @@ import {
   ChartSeriesItem,
   ChartCategoryAxis,
   ChartCategoryAxisItem,
-  ChartAxisDefaults
+  ChartAxisDefaults,
+  ChartPane,
+  ChartArea
 } from "@progress/kendo-react-charts";
 
 const styles = theme => ({
     chart: {
-        maxHeight:100
+        maxHeight:100,
+        paddingLeft: 20
     }
 });
 
@@ -33,12 +36,15 @@ class AreaChartSmall extends React.Component {
     const { categories, firstSeries, secondSeries, thirdSeries } = this.state;
 
     return (
+        <div className={classes.chart}>
       <Chart>
+          <ChartArea height={100} width={100} />
         <ChartAxisDefaults visible={false} majorGridLines={false} />
         <ChartSeries>
           <ChartSeriesItem markers={false} color="#e6750ecc" type="area" data={firstSeries} tooltip={true}/>
         </ChartSeries>
       </Chart>
+      </div>
     );
   }
 }

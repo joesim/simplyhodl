@@ -26,10 +26,6 @@ const styles = theme => ({
     padding: "10px 0px 10px 20px",
     marginTop: -20,
     marginLeft: 2
-  },
-  chartAreaSmall: {
-    maxHeight: 200,
-    maxWidth:600
   }
 });
 
@@ -51,47 +47,71 @@ class OverviewPage extends React.Component {
           </Card>
         </Grid>
         <Grid item>
-          <Grid container spacing={16}>
-            <Grid item>
+          <Grid container spacing={16} directiom="row"
+                  justify="space-between"
+                  alignItems="center">
+          <Grid item>
               <Card>
-                <Typography className={classes.number} variant="display1">
-                  2,345/h
-                </Typography>
-                <Typography className={classes.title} variant="subheading">
-                  Luggage throughput
-                </Typography>
-              </Card>
-            </Grid>
-            <Grid item>
-              <Card>
-                <Typography className={classes.number} variant="display1">
-                  1,436
-                </Typography>
-                <Typography className={classes.title} variant="subheading">
-                  Luggage over time
-                </Typography>
-              </Card>
-            </Grid>
-            <Grid item className={classes.chartAreaSmall}>
-              <Card className={classes.chartAreaSmall}>
                 <Grid
                   container
                   directiom="row"
                   justify="flex-start"
-                  alignItems="center" className={classes.chartAreaSmall}
+                  alignItems="center"
                 >
                   <Grid item>
                     <Typography className={classes.number} variant="display1">
-                      345
+                      3,450/h
                     </Typography>
                     <Typography className={classes.title} variant="subheading">
-                      Luggage over time
+                      Luggage throughput
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <div>
                     <AreaChartSmall />
-                    </div>
+                  </Grid>
+                </Grid>
+              </Card>
+            </Grid>
+            <Grid item>
+              <Card>
+                <Grid
+                  container
+                  directiom="row"
+                  justify="flex-start"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <Typography className={classes.number} variant="display1">
+                      0/4
+                    </Typography>
+                    <Typography className={classes.title} variant="subheading">
+                      Open lanes
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <AreaChartSmall />
+                  </Grid>
+                </Grid>
+              </Card>
+            </Grid>
+            <Grid item>
+              <Card>
+                <Grid
+                  container
+                  directiom="row"
+                  justify="flex-start"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <Typography className={classes.number} variant="display1">
+                      100%
+                    </Typography>
+                    <Typography className={classes.title} variant="subheading">
+                      Belt downtime
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <AreaChartSmall />
                   </Grid>
                 </Grid>
               </Card>
